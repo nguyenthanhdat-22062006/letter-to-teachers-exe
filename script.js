@@ -31,6 +31,8 @@
   const terminalOutput = document.getElementById('terminal-output');
   const terminalBar = document.getElementById('terminal-progress-bar');
   const proseParagraphs = Array.from(document.querySelectorAll('.prose-para'));
+  const cardHeaderEl = document.querySelector('.card-header');
+  const terminalBoxEl = document.querySelector('.terminal-box');
   const codeSnippetEl = document.querySelector('.code-snippet');
   const cardSignoffEl = document.querySelector('.card-signoff');
   const toastEl = document.getElementById('card-toast');
@@ -252,6 +254,8 @@
   function resetCardReveals() {
     if (terminalOutput) terminalOutput.innerHTML = '';
     if (terminalBar) terminalBar.style.width = '0%';
+    if (cardHeaderEl) cardHeaderEl.classList.remove('is-revealed');
+    if (terminalBoxEl) terminalBoxEl.classList.remove('is-revealed');
     proseParagraphs.forEach((p) => p.classList.remove('is-revealed'));
     if (codeSnippetEl) codeSnippetEl.classList.remove('is-revealed');
     if (cardSignoffEl) cardSignoffEl.classList.remove('is-revealed');
@@ -312,12 +316,14 @@
     mountLine();
   }
   function revealCardContent() {
-    runTerminalSequence();
+    scheduleTask(() => { if (cardHeaderEl) cardHeaderEl.classList.add('is-revealed'); }, prefersReducedMotion ? 40 : 150);
+    scheduleTask(() => { if (terminalBoxEl) terminalBoxEl.classList.add('is-revealed'); }, prefersReducedMotion ? 60 : 300);
+    scheduleTask(runTerminalSequence, prefersReducedMotion ? 80 : 550);
     proseParagraphs.forEach((p, idx) => {
-      scheduleTask(() => p.classList.add('is-revealed'), prefersReducedMotion ? 60 : 220 + idx * 140);
+      scheduleTask(() => p.classList.add('is-revealed'), prefersReducedMotion ? 60 : 700 + idx * 160);
     });
-    scheduleTask(() => { if (codeSnippetEl) codeSnippetEl.classList.add('is-revealed'); }, prefersReducedMotion ? 120 : 820);
-    scheduleTask(() => { if (cardSignoffEl) cardSignoffEl.classList.add('is-revealed'); }, prefersReducedMotion ? 180 : 980);
+    scheduleTask(() => { if (codeSnippetEl) codeSnippetEl.classList.add('is-revealed'); }, prefersReducedMotion ? 120 : 1380);
+    scheduleTask(() => { if (cardSignoffEl) cardSignoffEl.classList.add('is-revealed'); }, prefersReducedMotion ? 180 : 1560);
   }
 
   /* ---------- Stage transitions ---------- */

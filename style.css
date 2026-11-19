@@ -246,25 +246,38 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible {
 }
 .btn-secondary:hover { background: var(--bg-cream); border-color: var(--gold-deep); transform: translateY(-1px); }
 .intro-meta { margin: 0; font-size: 0.82rem; color: var(--navy-muted); }
-.intro-kbd-hint { margin: 0; font-size: 0.76rem; color: rgba(84,99,127,0.85); }
-.intro-kbd-hint kbd { font-family: var(--font-mono); border: 1px solid var(--hairline); border-bottom-width: 2px; background: #fff; padding: 1px 6px; border-radius: 6px; }
 
 /* ---------- Card ---------- */
-.card-stage { width: 100%; max-width: 840px; display: flex; justify-content: center; perspective: 1200px; }
+.card-stage { width: 100%; max-width: 840px; display: flex; justify-content: center; perspective: 1400px; }
 .greeting-card {
+  position: relative;
   width: 100%; background: var(--surface-white); border-radius: 18px;
   padding: clamp(10px, 2vw, 18px); border: 1px solid rgba(214,184,120,0.45);
   box-shadow: var(--card-shadow);
-  opacity: 0; transform: translateY(34px) scale(0.96);
-  transition: opacity 680ms var(--ease-editorial), transform 720ms var(--ease-editorial);
+  overflow: hidden;
+  opacity: 0; transform: translateY(70px) scale(0.93) rotateX(10deg); filter: blur(12px);
+  transform-origin: 50% 0%;
+  transition: opacity 900ms var(--ease-editorial), transform 950ms var(--ease-editorial), filter 850ms var(--ease-editorial);
 }
-.card-stage.is-visible .greeting-card { opacity: 1; transform: translateY(0) scale(1); }
-.card-stage.is-closing .greeting-card { opacity: 0; transform: translateY(24px) scale(0.97); }
+.greeting-card::before {
+  content: ""; position: absolute; inset: -40%; z-index: 5; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.85) 50%, rgba(214,184,120,0.35) 52%, transparent 60%);
+  transform: translateX(-70%); opacity: 0;
+}
+.card-stage.is-visible .greeting-card { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0); }
+.card-stage.is-visible .greeting-card::before { opacity: 1; animation: cardShine 1.4s var(--ease-editorial) 250ms 1 both; }
+@keyframes cardShine {
+  0% { transform: translateX(-70%); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateX(70%); opacity: 0; }
+}
+.card-stage.is-closing .greeting-card { opacity: 0; transform: translateY(30px) scale(0.97); filter: blur(6px); }
 .card-inner-frame {
   border: 1px solid rgba(214,184,120,0.5); border-radius: 12px; padding: clamp(22px, 4.5vw, 52px);
   background: radial-gradient(circle at top right, rgba(216,206,238,0.16), transparent 36%), radial-gradient(circle at bottom left, rgba(214,184,120,0.12), transparent 40%), #FFFFFF;
 }
-.card-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 26px; }
+.card-header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 26px; opacity: 0; transform: translateY(18px); filter: blur(6px); transition: opacity 650ms var(--ease-editorial), transform 650ms var(--ease-editorial), filter 650ms var(--ease-editorial); }
+.card-header.is-revealed { opacity: 1; transform: translateY(0); filter: blur(0); }
 .card-header__meta { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.16em; color: var(--gold-deep); }
 .card-anniversary {
   margin: 0; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--navy-muted);
@@ -275,7 +288,8 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible {
 .card-divider__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 .card-divider__glyph { font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold-deep); }
 
-.terminal-box { background: #101F3C; color: #F8F5EF; border-radius: 12px; overflow: hidden; margin-bottom: 26px; box-shadow: 0 10px 26px rgba(23,43,77,0.16); border: 1px solid rgba(214,184,120,0.25); }
+.terminal-box { background: #101F3C; color: #F8F5EF; border-radius: 12px; overflow: hidden; margin-bottom: 26px; box-shadow: 0 10px 26px rgba(23,43,77,0.16); border: 1px solid rgba(214,184,120,0.25); opacity: 0; transform: translateY(16px) scale(0.98); filter: blur(5px); transition: opacity 600ms var(--ease-editorial), transform 600ms var(--ease-editorial), filter 600ms var(--ease-editorial); }
+.terminal-box.is-revealed { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 .terminal-box__bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.08); }
 .terminal-box__dots { display: flex; gap: 6px; }
 .terminal-box__dots span { width: 9px; height: 9px; border-radius: 50%; background: rgba(248,245,239,0.25); }
@@ -346,7 +360,6 @@ button:focus-visible, [tabindex]:focus-visible, a:focus-visible {
   .terminal-box__body, .code-snippet__pre { padding: 13px; }
   .card-actions { flex-direction: column; align-items: stretch; }
   .card-actions .btn-secondary, .card-actions .btn-primary { width: 100%; }
-  .intro-kbd-hint { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
