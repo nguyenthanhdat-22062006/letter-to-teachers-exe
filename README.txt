@@ -11,6 +11,8 @@ Cách 1 - Mở trực tiếp (đơn giản nhất):
    Giải nén file .zip, mở đúp file "index.html" bằng trình duyệt
    (Chrome, Edge, Firefox, Cốc Cốc...). Toàn bộ hiệu ứng vẫn hoạt
    động bình thường.
+   Lưu ý: nếu trình duyệt chặn hiển thị nội dung khi mở trực tiếp,
+   hãy dùng Cách 2 bên dưới cho chắc chắn.
 
 Cách 2 - Chạy qua máy chủ cục bộ (khuyến nghị để kiểm tra đầy đủ):
    Mở Terminal / Command Prompt trong thư mục đã giải nén, gõ:
