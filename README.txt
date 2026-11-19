@@ -20,7 +20,7 @@ Cách 2 - Chạy qua máy chủ cục bộ (khuyến nghị để kiểm tra đ�
    Sau đó mở trình duyệt tại:  http://localhost:8000
 
 Cách 3 - Xem bản trực tuyến (bản chính thức đã đăng ký GitHub Pages):
-   https://nguyenthanhdat-22062006.github.io/dear-teacher-exe/
+   https://nguyenthanhdat-22062006.github.io/letter-to-teachers-exe/
 
 =====================================================================
 2. CẤU TRÚC THƯ MỤC
