@@ -1,5 +1,5 @@
 /**
- * DEAR TEACHER.EXE — Upgraded Interactive Controller
+ * LETTER TO TEACHERS.EXE — Upgraded Interactive Controller
  * - Stage machine: intro -> opening -> card (guarded against double-click)
  * - Petals + confetti canvas, background glyphs
  * - Terminal typewriter with progress bar
@@ -266,7 +266,7 @@
     const session = terminalSessionId;
     terminalOutput.innerHTML = '';
     const lines = [
-      { text: 'Initializing gratitude.exe...', success: false },
+      { text: 'Initializing letter-to-teachers.exe...', success: false },
       { text: 'Loading memories... 100%', success: false },
       { text: 'Thank you, Teacher!', success: true },
     ];
@@ -484,7 +484,7 @@
     if (copyCodeBtn) copyCodeBtn.addEventListener('click', () => copyText(CODE_TEXT, 'Đã sao chép đoạn code tri ân.'));
     if (copyWishBtn) copyWishBtn.addEventListener('click', () => copyText(WISH_TEXT, 'Đã sao chép lời chúc để gửi Thầy/Cô.'));
     if (shareBtn) shareBtn.addEventListener('click', async () => {
-      const data = { title: 'DEAR TEACHER.EXE — 20/11', text: WISH_TEXT, url: window.location.href };
+      const data = { title: 'LETTER TO TEACHERS.EXE — 20/11', text: WISH_TEXT, url: window.location.href };
       try {
         if (navigator.share) { await navigator.share(data); }
         else await copyText(window.location.href, 'Đã sao chép link thiệp để gửi Thầy/Cô.');
